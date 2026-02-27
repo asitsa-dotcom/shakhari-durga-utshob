@@ -8,6 +8,14 @@ const Footer = () => {
         <p className="mt-1 text-sm opacity-80">
           Registration No: S0062454 (2025–2026)
         </p>
+        <a
+          href="https://www.facebook.com/groups/819785423273393"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-2 rounded-md bg-primary-foreground/15 px-4 py-2 text-sm font-medium transition-colors hover:bg-primary-foreground/25"
+        >
+          <Facebook className="h-5 w-5" /> Facebook Page
+        </a>
         <div className="mt-4 border-t border-primary-foreground/20 pt-4">
           <p className="text-xs opacity-70">
             © 2026 শাঁখারিটোলা দুর্গোৎসব সমিতি
