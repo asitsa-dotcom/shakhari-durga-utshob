@@ -1,3 +1,5 @@
+import { Facebook } from "lucide-react";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-primary text-primary-foreground">
