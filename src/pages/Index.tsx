@@ -7,8 +7,9 @@ const Index = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative flex min-h-[70vh] items-center justify-center bg-gradient-to-b from-primary/90 to-primary text-primary-foreground">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604423058082-00e1a3fabb5b?w=1200')] bg-cover bg-center opacity-20" />
+      <section className="relative flex min-h-[70vh] items-center justify-center text-primary-foreground">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604423058082-00e1a3fabb5b?w=1200')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4 py-16 text-center">
           <h1 className="text-4xl font-bold leading-tight md:text-6xl">
             {t("home.title")}
