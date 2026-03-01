@@ -8,7 +8,7 @@ const Index = () => {
     <div>
       {/* Hero Section */}
       <section className="relative flex min-h-[70vh] items-center justify-center text-primary-foreground">
-        <div className="absolute inset-0 bg-[url('/images/durga-hero.jpg')] bg-cover bg-center bg-no-repeat" />
+        <div className="absolute inset-0 bg-[url('/images/durga-hero.jpg')] bg-cover bg-[center_top_20%] bg-no-repeat" />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4 py-16 text-center">
           <h1 className="text-4xl font-bold leading-tight md:text-6xl">
