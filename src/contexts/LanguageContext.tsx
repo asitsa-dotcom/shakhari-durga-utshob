@@ -67,6 +67,7 @@ const translations: Record<string, Record<Language, string>> = {
 
   // Leadership
   "leadership.title": { bn: "সমিতির নেতৃত্ব", en: "Committee Leadership", hi: "समिति नेतृत्व" },
+  "leadership.subtitle": { bn: "সমিতির অভিজ্ঞ ও দায়িত্বশীল নেতৃত্বের হাত ধরেই আমাদের কার্যক্রম সুষ্ঠুভাবে পরিচালিত হয়ে আসছে।", en: "Our activities are efficiently managed under the experienced and responsible leadership of the committee.", hi: "समिति के अनुभवी और जिम्मेदार नेतृत्व में हमारी गतिविधियाँ सुचारू रूप से संचालित होती हैं।" },
   "leadership.executive": { bn: "কার্যকরী সদস্যবৃন্দ", en: "Executive Members", hi: "कार्यकारी सदस्य" },
   "leadership.president": { bn: "সভাপতি", en: "President", hi: "अध्यक्ष" },
   "leadership.vice_president": { bn: "সহ-সভাপতি", en: "Vice President", hi: "उपाध्यक्ष" },
