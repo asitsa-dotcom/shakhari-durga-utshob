@@ -1,12 +1,12 @@
 import { User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const leaderKeys = [
-  "leadership.president",
-  "leadership.vice_president",
-  "leadership.secretary",
-  "leadership.joint_secretary",
-  "leadership.treasurer",
+const leaders = [
+  { key: "leadership.president", bn: "শ্রী অসীম চক্রবর্তী", en: "ASIM CHAKRABORTY" },
+  { key: "leadership.vice_president", bn: "শ্রী অশোক ভট্টাচার্য", en: "ASHOKE BHATTACHARYA" },
+  { key: "leadership.secretary", bn: "শ্রী সিদ্ধার্থ চক্রবর্তী", en: "SIDDHARTHA CHAKRABORTY" },
+  { key: "leadership.joint_secretary", bn: "শ্রী শান্তনু দাস", en: "SANTANU DAS" },
+  { key: "leadership.treasurer", bn: "শ্রী অসিত কুমার সরকার", en: "ASIT KUMAR SARKAR" },
 ];
 
 const Leadership = () => {
