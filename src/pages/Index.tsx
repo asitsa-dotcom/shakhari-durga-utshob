@@ -7,8 +7,9 @@ const Index = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative flex min-h-[70vh] items-center justify-center bg-gradient-to-b from-primary/90 to-primary text-primary-foreground">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604423058082-00e1a3fabb5b?w=1200')] bg-cover bg-center opacity-20" />
+      <section className="relative flex min-h-[70vh] items-center justify-center text-primary-foreground">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604423058082-00e1a3fabb5b?w=1200')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4 py-16 text-center">
           <h1 className="text-4xl font-bold leading-tight md:text-6xl">
             {t("home.title")}
@@ -26,18 +27,21 @@ const Index = () => {
       </section>
 
       {/* Theme Song 2025 */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="mb-8 text-center text-3xl font-bold text-primary">
-          {t("home.theme2025")}
-        </h2>
-        <div className="mx-auto max-w-3xl">
-          <YouTubeEmbed videoId="zUTD7gZQ8pc" title="Official Theme Song 2025" />
+      <section className="relative" style={{ backgroundColor: '#F9F9F9' }}>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604423058082-00e1a3fabb5b?w=800')] bg-center bg-no-repeat opacity-[0.06]" />
+        <div className="container relative z-10 mx-auto px-4 py-16">
+          <h2 className="mb-8 text-center text-3xl font-bold text-primary">
+            {t("home.theme2025")}
+          </h2>
+          <div className="mx-auto max-w-3xl">
+            <YouTubeEmbed videoId="zUTD7gZQ8pc" title="Official Theme Song 2025" />
+          </div>
         </div>
       </section>
 
       {/* Theme Song 2024 */}
-      <section className="bg-muted">
-        <div className="container mx-auto px-4 py-16">
+      <section className="relative bg-background">
+        <div className="container relative z-10 mx-auto px-4 py-16">
           <h2 className="mb-8 text-center text-3xl font-bold text-primary">
             {t("home.theme2024")}
           </h2>
