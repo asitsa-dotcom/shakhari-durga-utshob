@@ -15,27 +15,31 @@ const Leadership = () => {
   const executiveMembers = Array.from({ length: 6 }, (_, i) => i);
 
   return (
-    <div className="bg-primary/5 py-16">
+    <div className="py-16" style={{ backgroundColor: "#F9F9F9" }}>
       <div className="container mx-auto px-4">
         <h1 className="mb-4 text-center text-4xl font-bold text-primary">
           {t("leadership.title")}
         </h1>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
+        <p className="mx-auto mb-14 max-w-2xl text-center text-muted-foreground">
           {t("leadership.subtitle")}
         </p>
 
-        <div className="mx-auto mb-12 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mb-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
           {leaders.map((leader) => (
             <div
               key={leader.key}
-              className="flex flex-col items-center rounded-lg border border-border bg-card p-6 shadow-sm text-center"
+              className="flex flex-col items-center rounded-xl bg-card px-6 py-8 text-center shadow-md"
             >
-              <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                 <User className="h-8 w-8 text-primary" />
               </div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-primary">{t(leader.key)}</p>
-              <p className="mt-1 text-lg font-bold text-card-foreground">{leader.bn}</p>
-              <p className="text-xs text-muted-foreground">({leader.en})</p>
+              <p className="text-sm font-bold uppercase tracking-wider text-primary">
+                {t(leader.key)}
+              </p>
+              <p className="mt-2 text-xl font-bold text-card-foreground">{leader.bn}</p>
+              <p className="mt-0.5 text-xs tracking-wide text-muted-foreground">
+                ({leader.en})
+              </p>
             </div>
           ))}
         </div>
@@ -43,11 +47,11 @@ const Leadership = () => {
         <h2 className="mb-8 text-center text-2xl font-bold text-primary">
           {t("leadership.executive")}
         </h2>
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-3xl grid-cols-2 gap-5 sm:grid-cols-3">
           {executiveMembers.map((id) => (
             <div
               key={id}
-              className="flex flex-col items-center rounded-lg border border-border bg-card p-4 text-center"
+              className="flex flex-col items-center rounded-xl bg-card px-4 py-6 text-center shadow-md"
             >
               <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                 <User className="h-6 w-6 text-muted-foreground" />
