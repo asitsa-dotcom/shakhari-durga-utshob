@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative flex min-h-[70vh] items-center justify-center text-primary-foreground">
+      <section className="relative text-primary-foreground">
         <div className="absolute inset-0 bg-[url('/images/durga-hero.jpg')] bg-cover bg-[center_top_30%] bg-no-repeat" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex min-h-[70vh] flex-col justify-between px-4 py-10 text-center">
