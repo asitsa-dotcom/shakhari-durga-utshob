@@ -30,9 +30,13 @@ const Leadership = () => {
               key={leader.key}
               className="flex flex-col items-center rounded-xl bg-card px-6 py-8 text-center shadow-md"
             >
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <User className="h-8 w-8 text-primary" />
-              </div>
+              {leader.photo ? (
+                <img src={leader.photo} alt={leader.en} className="h-16 w-16 rounded-full object-cover" />
+              ) : (
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <User className="h-8 w-8 text-primary" />
+                </div>
+              )}
               <p className="text-sm font-bold uppercase tracking-wider text-primary">
                 {t(leader.key)}
               </p>
