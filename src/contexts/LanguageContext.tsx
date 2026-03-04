@@ -58,6 +58,10 @@ const translations: Record<string, Record<Language, string>> = {
   "activities.sports_desc": { bn: "যুব সমাজকে উৎসাহ প্রদান।", en: "Youth encouragement.", hi: "युवा सहभागिता।" },
   "activities.social": { bn: "সামাজিক কর্মসূচি", en: "Social Initiatives", hi: "सामाजिक कार्यक्रम" },
   "activities.social_desc": { bn: "সমাজকল্যাণমূলক উদ্যোগ।", en: "Community welfare programs.", hi: "जनहित कार्य।" },
+  "activities.bhog": { bn: "ভোগ বিতরণ", en: "Bhog Distribution", hi: "भोग वितरण" },
+  "activities.bhog_desc": { bn: "পূজার ৩ দিন ৫০০ সাধারণ মানুষ এবং ১০০-র অধিক সদস্যদের খাওয়া-দাওয়ার ব্যবস্থা করা হয়।", en: "During the 3 days of Puja, food is arranged for 500 common people and over 100 members.", hi: "पूजा के 3 दिनों में 500 आम लोगों और 100 से अधिक सदस्यों के लिए भोजन की व्यवस्था की जाती है।" },
+  "activities.health": { bn: "স্বাস্থ্য পরীক্ষা শিবির", en: "Health Checkup Camp", hi: "स्वास्थ्य जाँच शिविर" },
+  "activities.health_desc": { bn: "এলাকাবাসীদের জন্য বিনামূল্যে স্বাস্থ্য পরীক্ষা শিবিরের আয়োজন করা হয়।", en: "Free health checkup camps are organized for the local community.", hi: "स्थानीय समुदाय के लिए निःशुल्क स्वास्थ्य जाँच शिविर आयोजित किए जाते हैं।" },
 
   // Gallery
   "gallery.title": { bn: "গ্যালারি", en: "Gallery", hi: "गैलरी" },
