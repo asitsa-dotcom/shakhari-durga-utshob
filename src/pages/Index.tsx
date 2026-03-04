@@ -12,7 +12,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex min-h-[70vh] flex-col px-4 py-6 text-center">
           {/* Top: Title + Subtitle */}
-          <div className="pt-2">
+          <div className="pt-0">
             <h1 className="text-4xl font-bold leading-tight md:text-6xl">
               {t("home.title")}
             </h1>
