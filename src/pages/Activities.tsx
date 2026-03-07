@@ -25,6 +25,12 @@ const socialSubSections = [
     descKey: "activities.health_desc",
     photos: [] as string[],
   },
+  {
+    icon: Heart,
+    titleKey: "activities.cloth",
+    descKey: "activities.cloth_desc",
+    photos: [] as string[],
+  },
 ];
 
 const Activities = () => {
@@ -32,6 +38,7 @@ const Activities = () => {
   const [subPhotos, setSubPhotos] = useState<Record<string, string[]>>({
     "activities.bhog": [],
     "activities.health": [],
+    "activities.cloth": [],
   });
 
   const handlePhotoAdd = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
