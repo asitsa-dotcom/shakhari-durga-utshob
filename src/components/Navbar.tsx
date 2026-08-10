@@ -11,6 +11,7 @@ const navKeys = [
   { to: "/gallery", key: "nav.gallery" },
   { to: "/leadership", key: "nav.leadership" },
   { to: "/live", key: "nav.live" },
+  { to: "/emagazine", key: "nav.emagazine" },
   { to: "/contact", key: "nav.contact" },
 ];
 
