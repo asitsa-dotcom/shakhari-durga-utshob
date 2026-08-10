@@ -102,6 +102,21 @@ const translations: Record<string, Record<Language, string>> = {
   "emagazine.progress": { bn: "অগ্রগতি", en: "Progress", hi: "प्रगति" },
   "emagazine.thumbnails": { bn: "পৃষ্ঠার থাম্বনেইল", en: "Page thumbnails", hi: "पृष्ठ थंबनेल" },
   "emagazine.page": { bn: "পৃষ্ঠা", en: "Page", hi: "पृष्ठ" },
+  "emagazine.toc": { bn: "সূচিপত্র", en: "Contents", hi: "सूचीपत्र" },
+  "emagazine.search_label": { bn: "পৃষ্ঠা বা বিষয় খুঁজুন", en: "Search page or topic", hi: "पृष्ठ या विषय खोजें" },
+  "emagazine.search_placeholder": {
+    bn: "যেমন: সম্পাদকীয়, কবিতা, কমিটি, ১৫",
+    en: "e.g. editorial, poem, committee, 15",
+    hi: "जैसे: संपादकीय, कविता, समिति, 15",
+  },
+  "emagazine.clear": { bn: "মুছে ফেলুন", en: "Clear", hi: "साफ़ करें" },
+  "emagazine.results": { bn: "{{count}} টি পৃষ্ঠা পাওয়া গেছে", en: "{{count}} pages found", hi: "{{count}} पृष्ठ मिले" },
+  "emagazine.no_results": { bn: "কোনো পৃষ্ঠা পাওয়া যায়নি।", en: "No pages found.", hi: "कोई पृष्ठ नहीं मिला।" },
+  "emagazine.show_toc": { bn: "সূচিপত্র দেখুন", en: "Show contents", hi: "सूचीपत्र देखें" },
+  "emagazine.hide_toc": { bn: "সূচিপত্র লুকান", en: "Hide contents", hi: "सूचीपत्र छिपाएँ" },
+  "emagazine.current_topic": { bn: "এই পৃষ্ঠার বিষয়", en: "Topic of this page", hi: "इस पृष्ठ का विषय" },
+  "emagazine.filter_all": { bn: "সব", en: "All", hi: "सभी" },
+
 
   // Contact
   "contact.title": { bn: "যোগাযোগ করুন", en: "Contact Us", hi: "संपर्क करें" },
