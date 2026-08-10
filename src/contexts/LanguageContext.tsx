@@ -5,7 +5,7 @@ export type Language = "bn" | "en" | "hi";
 interface LanguageContextType {
   lang: Language;
   setLang: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, vars?: Record<string, string | number>) => string;
 }
 
 const translations: Record<string, Record<Language, string>> = {
@@ -16,6 +16,7 @@ const translations: Record<string, Record<Language, string>> = {
   "nav.gallery": { bn: "গ্যালারি", en: "Gallery", hi: "गैलरी" },
   "nav.leadership": { bn: "নেতৃত্ব", en: "Leadership", hi: "नेतृत्व" },
   "nav.live": { bn: "লাইভ", en: "Live", hi: "लाइव" },
+  "nav.emagazine": { bn: "ই-ম্যাগাজিন", en: "E-Magazine", hi: "ई-मैगज़ीन" },
   "nav.contact": { bn: "যোগাযোগ", en: "Contact", hi: "संपर्क" },
 
   // Home
@@ -88,6 +89,20 @@ const translations: Record<string, Record<Language, string>> = {
   "live.coming_soon": { bn: "সরাসরি সম্প্রচার শীঘ্রই আসছে", en: "Live broadcast coming soon", hi: "लाइव प्रसारण जल्द आ रहा है" },
   "live.watch_here": { bn: "দুর্গাপূজার সময় এখানে লাইভ দেখুন", en: "Watch live here during Durga Puja", hi: "दुर्गा पूजा के दौरान यहाँ लाइव देखें" },
 
+  // E-Magazine
+  "emagazine.title": { bn: "ই-ম্যাগাজিন", en: "E-Magazine", hi: "ई-मैगज़ीन" },
+  "emagazine.subtitle": { bn: "শাঁখারিটোলা দুর্গোৎসব সমিতির ডিজিটাল স্মারক সংকলন।", en: "Digital souvenir collection of Shankharitola Durgatsav Samity.", hi: "शांखारिटोला दुर्गोत्सव समिति का डिजिटल स्मारिका संग्रह।" },
+  "emagazine.souvenir2025": { bn: "স্মারক ২০২৫-২০২৬", en: "Souvenir 2025-2026", hi: "स्मारिका 2025-2026" },
+  "emagazine.souvenir2025_desc": { bn: "দুর্গাপূজা ২০২৫-এর বিশেষ সংখ্যা।", en: "Special issue for Durga Puja 2025.", hi: "दुर्गा पूजा 2025 की विशेष संख्या।" },
+  "emagazine.page_counter": { bn: "পৃষ্ঠা {{current}} / {{total}}", en: "Page {{current}} / {{total}}", hi: "पृष्ठ {{current}} / {{total}}" },
+  "emagazine.prev": { bn: "পূর্ববর্তী", en: "Previous", hi: "पिछला" },
+  "emagazine.next": { bn: "পরবর্তী", en: "Next", hi: "अगला" },
+  "emagazine.zoom": { bn: "বড় করুন", en: "Zoom", hi: "ज़ूम" },
+  "emagazine.close": { bn: "বন্ধ করুন", en: "Close", hi: "बंद करें" },
+  "emagazine.progress": { bn: "অগ্রগতি", en: "Progress", hi: "प्रगति" },
+  "emagazine.thumbnails": { bn: "পৃষ্ঠার থাম্বনেইল", en: "Page thumbnails", hi: "पृष्ठ थंबनेल" },
+  "emagazine.page": { bn: "পৃষ্ঠা", en: "Page", hi: "पृष्ठ" },
+
   // Contact
   "contact.title": { bn: "যোগাযোগ করুন", en: "Contact Us", hi: "संपर्क करें" },
   "contact.name": { bn: "নাম", en: "Name", hi: "नाम" },
@@ -108,8 +123,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Language>("bn");
 
-  const t = (key: string): string => {
-    return translations[key]?.[lang] ?? key;
+  const t = (key: string, vars?: Record<string, string | number>): string => {
+    let text = translations[key]?.[lang] ?? key;
+    if (vars) {
+      Object.entries(vars).forEach(([k, v]) => {
+        text = text.replace(new RegExp(`\\{\\{${k}\\}\\}`, "g"), String(v));
+      });
+    }
+    return text;
   };
 
   return (
