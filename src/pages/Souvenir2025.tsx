@@ -215,9 +215,8 @@ const Souvenir2025 = () => {
           </button>
 
           <div
+            ref={viewerRef}
             className="relative flex-1 rounded-lg border border-border bg-card p-2 shadow-sm touch-pan-y"
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
           >
             <button
               onClick={() => setLightbox(true)}
