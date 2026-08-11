@@ -95,6 +95,18 @@ const Souvenir2025 = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleGoto = () => {
+    const normalized = normalize(gotoValue);
+    const page = parseInt(normalized, 10);
+    if (!isNaN(page) && page >= 1 && page <= pages.length) {
+      openPage(page);
+      setGotoValue("");
+      setGotoError(false);
+    } else {
+      setGotoError(true);
+    }
+  };
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
