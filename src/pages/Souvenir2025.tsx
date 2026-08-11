@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
@@ -44,6 +44,7 @@ const Souvenir2025 = () => {
   const [tocOpen, setTocOpen] = useState(true);
   const [gotoValue, setGotoValue] = useState("");
   const [gotoError, setGotoError] = useState(false);
+  const viewerRef = useRef<HTMLDivElement | null>(null);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const goNext = useCallback(() => setIndex((i) => Math.min(pages.length - 1, i + 1)), []);
@@ -107,6 +108,33 @@ const Souvenir2025 = () => {
     }
   };
 
+  useEffect(() => {
+    const el = viewerRef.current;
+    if (!el) return;
+    let start: { x: number; y: number } | null = null;
+    const handleStart = (e: TouchEvent) => {
+      start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const handleEnd = (e: TouchEvent) => {
+      if (!start) return;
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const diffX = start.x - endX;
+      const diffY = start.y - endY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX > 0) goNext();
+        else goPrev();
+      }
+      start = null;
+    };
+    el.addEventListener("touchstart", handleStart, { passive: true });
+    el.addEventListener("touchend", handleEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", handleStart);
+      el.removeEventListener("touchend", handleEnd);
+    };
+  }, [goPrev, goNext]);
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
@@ -168,7 +196,10 @@ const Souvenir2025 = () => {
             <ChevronLeft className="h-6 w-6" />
           </button>
 
-          <div className="relative flex-1 rounded-lg border border-border bg-card p-2 shadow-sm">
+          <div
+            ref={viewerRef}
+            className="relative flex-1 rounded-lg border border-border bg-card p-2 shadow-sm touch-pan-y"
+          >
             <button
               onClick={() => setLightbox(true)}
               aria-label={t("emagazine.zoom")}
