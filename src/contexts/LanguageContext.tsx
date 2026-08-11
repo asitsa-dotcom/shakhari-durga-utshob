@@ -116,6 +116,9 @@ const translations: Record<string, Record<Language, string>> = {
   "emagazine.hide_toc": { bn: "সূচিপত্র লুকান", en: "Hide contents", hi: "सूचीपत्र छिपाएँ" },
   "emagazine.current_topic": { bn: "এই পৃষ্ঠার বিষয়", en: "Topic of this page", hi: "इस पृष्ठ का विषय" },
   "emagazine.filter_all": { bn: "সব", en: "All", hi: "सभी" },
+  "emagazine.goto": { bn: "পৃষ্ঠায় যান", en: "Go to page", hi: "पृष्ठ पर जाएँ" },
+  "emagazine.goto_placeholder": { bn: "পৃষ্ঠা নম্বর", en: "Page number", hi: "पृष्ठ संख्या" },
+  "emagazine.goto_invalid": { bn: "১ থেকে ৩৮ এর মধ্যে একটি পৃষ্ঠা নম্বর লিখুন", en: "Enter a page number between 1 and 38", hi: "1 से 38 के बीच एक पृष्ठ संख्या दर्ज करें" },
 
 
   // Contact

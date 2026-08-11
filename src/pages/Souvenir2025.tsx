@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
 
@@ -42,6 +42,8 @@ const Souvenir2025 = () => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<TocCategory | "all">("all");
   const [tocOpen, setTocOpen] = useState(true);
+  const [gotoValue, setGotoValue] = useState("");
+  const [gotoError, setGotoError] = useState(false);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const goNext = useCallback(() => setIndex((i) => Math.min(pages.length - 1, i + 1)), []);
@@ -93,6 +95,18 @@ const Souvenir2025 = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleGoto = () => {
+    const normalized = normalize(gotoValue);
+    const page = parseInt(normalized, 10);
+    if (!isNaN(page) && page >= 1 && page <= pages.length) {
+      openPage(page);
+      setGotoValue("");
+      setGotoError(false);
+    } else {
+      setGotoError(true);
+    }
+  };
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
@@ -106,10 +120,43 @@ const Souvenir2025 = () => {
           })}
         </p>
         {currentEntry && (
-          <p className="mb-8 text-center text-sm font-medium text-foreground">
+          <p className="mb-2 text-center text-sm font-medium text-foreground">
             {currentEntry.title[lang]}
           </p>
         )}
+
+        <div className="mx-auto mb-6 flex max-w-xs flex-col items-center gap-2">
+          <div className="flex w-full items-center gap-2">
+            <input
+              id="goto-page"
+              type="text"
+              inputMode="numeric"
+              value={gotoValue}
+              onChange={(e) => {
+                setGotoValue(e.target.value);
+                setGotoError(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleGoto();
+              }}
+              placeholder={t("emagazine.goto_placeholder")}
+              aria-label={t("emagazine.goto")}
+              className="flex-1 rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+            />
+            <button
+              onClick={handleGoto}
+              className="flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <span className="hidden sm:inline">{t("emagazine.goto")}</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+          {gotoError && (
+            <p className="text-center text-xs text-destructive">
+              {t("emagazine.goto_invalid")}
+            </p>
+          )}
+        </div>
 
         <div className="mx-auto flex max-w-3xl items-stretch justify-center gap-2 md:gap-4">
           <button
