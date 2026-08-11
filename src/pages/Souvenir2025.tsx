@@ -126,6 +126,33 @@ const Souvenir2025 = () => {
     setTouchStart(null);
   };
 
+  useEffect(() => {
+    const el = viewerRef.current;
+    if (!el) return;
+    let start: { x: number; y: number } | null = null;
+    const handleStart = (e: TouchEvent) => {
+      start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const handleEnd = (e: TouchEvent) => {
+      if (!start) return;
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const diffX = start.x - endX;
+      const diffY = start.y - endY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX > 0) goNext();
+        else goPrev();
+      }
+      start = null;
+    };
+    el.addEventListener("touchstart", handleStart, { passive: true });
+    el.addEventListener("touchend", handleEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", handleStart);
+      el.removeEventListener("touchend", handleEnd);
+    };
+  }, [goPrev, goNext]);
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
