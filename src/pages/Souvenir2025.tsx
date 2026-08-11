@@ -44,7 +44,6 @@ const Souvenir2025 = () => {
   const [tocOpen, setTocOpen] = useState(true);
   const [gotoValue, setGotoValue] = useState("");
   const [gotoError, setGotoError] = useState(false);
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const viewerRef = useRef<HTMLDivElement | null>(null);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
