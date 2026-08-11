@@ -44,6 +44,7 @@ const Souvenir2025 = () => {
   const [tocOpen, setTocOpen] = useState(true);
   const [gotoValue, setGotoValue] = useState("");
   const [gotoError, setGotoError] = useState(false);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const goNext = useCallback(() => setIndex((i) => Math.min(pages.length - 1, i + 1)), []);
