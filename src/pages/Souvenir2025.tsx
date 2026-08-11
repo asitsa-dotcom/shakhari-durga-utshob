@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
