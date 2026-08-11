@@ -42,6 +42,8 @@ const Souvenir2025 = () => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<TocCategory | "all">("all");
   const [tocOpen, setTocOpen] = useState(true);
+  const [gotoValue, setGotoValue] = useState("");
+  const [gotoError, setGotoError] = useState(false);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const goNext = useCallback(() => setIndex((i) => Math.min(pages.length - 1, i + 1)), []);
