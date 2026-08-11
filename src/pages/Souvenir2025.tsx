@@ -120,10 +120,43 @@ const Souvenir2025 = () => {
           })}
         </p>
         {currentEntry && (
-          <p className="mb-8 text-center text-sm font-medium text-foreground">
+          <p className="mb-2 text-center text-sm font-medium text-foreground">
             {currentEntry.title[lang]}
           </p>
         )}
+
+        <div className="mx-auto mb-6 flex max-w-xs flex-col items-center gap-2">
+          <div className="flex w-full items-center gap-2">
+            <input
+              id="goto-page"
+              type="text"
+              inputMode="numeric"
+              value={gotoValue}
+              onChange={(e) => {
+                setGotoValue(e.target.value);
+                setGotoError(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleGoto();
+              }}
+              placeholder={t("emagazine.goto_placeholder")}
+              aria-label={t("emagazine.goto")}
+              className="flex-1 rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
+            />
+            <button
+              onClick={handleGoto}
+              className="flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <span className="hidden sm:inline">{t("emagazine.goto")}</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+          {gotoError && (
+            <p className="text-center text-xs text-destructive">
+              {t("emagazine.goto_invalid")}
+            </p>
+          )}
+        </div>
 
         <div className="mx-auto flex max-w-3xl items-stretch justify-center gap-2 md:gap-4">
           <button
