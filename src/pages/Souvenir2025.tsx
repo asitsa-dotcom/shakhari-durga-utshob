@@ -108,6 +108,23 @@ const Souvenir2025 = () => {
     }
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = touchStart.x - endX;
+    const diffY = touchStart.y - endY;
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) goNext();
+      else goPrev();
+    }
+    setTouchStart(null);
+  };
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
