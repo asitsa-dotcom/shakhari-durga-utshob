@@ -401,22 +401,38 @@ const Souvenir2025 = () => {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          onClick={() => setLightbox(false)}
+          className="fixed inset-0 z-50 overflow-auto bg-black/95 p-4"
+          onClick={() => {
+            setLightbox(false);
+            setLightboxZoom(false);
+          }}
         >
           <button
-            onClick={() => setLightbox(false)}
-            className="absolute right-4 top-4 rounded-full bg-background/20 p-2 text-white backdrop-blur transition-colors hover:bg-background/40"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox(false);
+              setLightboxZoom(false);
+            }}
+            className="fixed right-4 top-4 z-10 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
             aria-label={t("emagazine.close")}
           >
             <X className="h-6 w-6" />
           </button>
-          <img
-            src={pages[index]}
-            alt={`${t("emagazine.page")} ${index + 1}`}
-            className="max-h-[92vh] max-w-[96vw] rounded object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="flex min-h-full items-center justify-center">
+            <img
+              src={pages[index]}
+              alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
+              className={`rounded [image-rendering:-webkit-optimize-contrast] ${
+                lightboxZoom
+                  ? "w-[180%] max-w-none cursor-zoom-out md:w-[130%]"
+                  : "max-h-[92dvh] w-full max-w-[96vw] cursor-zoom-in object-contain"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxZoom((v) => !v);
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
