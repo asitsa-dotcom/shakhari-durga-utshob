@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
 
-const pages = Array.from({ length: 38 }, (_, i) => {
-  const n = i + 1;
-  const part = n <= 19 ? `p1-${String(n).padStart(2, "0")}` : `p2-${String(n - 19).padStart(2, "0")}`;
-  return `/emagazine/2025-2026/${part}.jpg`;
-});
+const pdfUrl = "/emagazine/2025-2026/sankharitola-souvenir-2025-2026.pdf";
+
+// প্রথম খণ্ডের ৭ নম্বর পাতা (ফাঁকা) বাদ দেওয়া হয়েছে
+const pages = [
+  ...Array.from({ length: 19 }, (_, i) => i + 1)
+    .filter((n) => n !== 7)
+    .map((n) => `p1-${String(n).padStart(2, "0")}`),
+  ...Array.from({ length: 19 }, (_, i) => `p2-${String(i + 1).padStart(2, "0")}`),
+].map((part) => `/emagazine/2025-2026/${part}.jpg`);
 
 const bnDigits = "০১২৩৪৫৬৭৮৯";
 const hiDigits = "०१२३४५६७८९";
@@ -44,6 +48,8 @@ const Souvenir2025 = () => {
   const [tocOpen, setTocOpen] = useState(true);
   const [gotoValue, setGotoValue] = useState("");
   const [gotoError, setGotoError] = useState(false);
+  const [readMode, setReadMode] = useState(false);
+  const [lightboxZoom, setLightboxZoom] = useState(false);
   const viewerRef = useRef<HTMLDivElement | null>(null);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
@@ -186,6 +192,24 @@ const Souvenir2025 = () => {
           )}
         </div>
 
+        <div className="mx-auto mb-4 flex max-w-3xl flex-wrap items-center justify-center gap-2">
+          <a
+            href={pdfUrl}
+            download="Sankharitola-Souvenir-2025-2026.pdf"
+            className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+          >
+            <Download className="h-4 w-4" />
+            {t("emagazine.download_pdf")}
+          </a>
+          <button
+            onClick={() => setReadMode((v) => !v)}
+            className="flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-accent/20"
+          >
+            {readMode ? <Maximize2 className="h-4 w-4" /> : <BookOpen className="h-4 w-4" />}
+            {readMode ? t("emagazine.fit_screen") : t("emagazine.read_mode")}
+          </button>
+        </div>
+
         <div className="mx-auto flex max-w-3xl items-stretch justify-center gap-2 md:gap-4">
           <button
             onClick={goPrev}
@@ -198,7 +222,7 @@ const Souvenir2025 = () => {
 
           <div
             ref={viewerRef}
-            className="relative flex-1 rounded-lg border border-border bg-card p-2 shadow-sm touch-pan-y"
+            className="relative min-w-0 flex-1 rounded-lg border border-border bg-card p-2 shadow-sm touch-pan-y"
           >
             <button
               onClick={() => setLightbox(true)}
@@ -207,11 +231,21 @@ const Souvenir2025 = () => {
             >
               <ZoomIn className="h-4 w-4" />
             </button>
-            <img
-              src={pages[index]}
-              alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
-              className="mx-auto block max-h-[70vh] w-auto rounded object-contain"
-            />
+            {readMode ? (
+              <div className="max-h-[75dvh] overflow-auto rounded">
+                <img
+                  src={pages[index]}
+                  alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
+                  className="block w-full rounded [image-rendering:-webkit-optimize-contrast]"
+                />
+              </div>
+            ) : (
+              <img
+                src={pages[index]}
+                alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
+                className="mx-auto block h-auto max-h-[70dvh] w-full max-w-full rounded object-contain [image-rendering:-webkit-optimize-contrast]"
+              />
+            )}
           </div>
 
           <button
@@ -223,6 +257,10 @@ const Souvenir2025 = () => {
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
+
+        <p className="mt-3 text-center text-xs text-muted-foreground md:hidden">
+          {t("emagazine.swipe_hint")}
+        </p>
 
         <div className="mx-auto mt-6 max-w-3xl">
           <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
@@ -363,22 +401,38 @@ const Souvenir2025 = () => {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          onClick={() => setLightbox(false)}
+          className="fixed inset-0 z-50 overflow-auto bg-black/95 p-4"
+          onClick={() => {
+            setLightbox(false);
+            setLightboxZoom(false);
+          }}
         >
           <button
-            onClick={() => setLightbox(false)}
-            className="absolute right-4 top-4 rounded-full bg-background/20 p-2 text-white backdrop-blur transition-colors hover:bg-background/40"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox(false);
+              setLightboxZoom(false);
+            }}
+            className="fixed right-4 top-4 z-10 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
             aria-label={t("emagazine.close")}
           >
             <X className="h-6 w-6" />
           </button>
-          <img
-            src={pages[index]}
-            alt={`${t("emagazine.page")} ${index + 1}`}
-            className="max-h-[92vh] max-w-[96vw] rounded object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="flex min-h-full items-center justify-center">
+            <img
+              src={pages[index]}
+              alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
+              className={`rounded [image-rendering:-webkit-optimize-contrast] ${
+                lightboxZoom
+                  ? "w-[180%] max-w-none cursor-zoom-out md:w-[130%]"
+                  : "max-h-[92dvh] w-full max-w-[96vw] cursor-zoom-in object-contain"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxZoom((v) => !v);
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
