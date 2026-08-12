@@ -118,7 +118,11 @@ const translations: Record<string, Record<Language, string>> = {
   "emagazine.filter_all": { bn: "সব", en: "All", hi: "सभी" },
   "emagazine.goto": { bn: "পৃষ্ঠায় যান", en: "Go to page", hi: "पृष्ठ पर जाएँ" },
   "emagazine.goto_placeholder": { bn: "পৃষ্ঠা নম্বর", en: "Page number", hi: "पृष्ठ संख्या" },
-  "emagazine.goto_invalid": { bn: "১ থেকে ৩৮ এর মধ্যে একটি পৃষ্ঠা নম্বর লিখুন", en: "Enter a page number between 1 and 38", hi: "1 से 38 के बीच एक पृष्ठ संख्या दर्ज करें" },
+  "emagazine.goto_invalid": { bn: "১ থেকে ৩৭ এর মধ্যে একটি পৃষ্ঠা নম্বর লিখুন", en: "Enter a page number between 1 and 37", hi: "1 से 37 के बीच एक पृष्ठ संख्या दर्ज करें" },
+  "emagazine.download_pdf": { bn: "পিডিএফ ডাউনলোড করুন", en: "Download PDF", hi: "पीडीएफ़ डाउनलोड करें" },
+  "emagazine.fit_screen": { bn: "স্ক্রিনে ফিট", en: "Fit to screen", hi: "स्क्रीन पर फ़िट" },
+  "emagazine.read_mode": { bn: "পড়ার মোড (বড় হরফ)", en: "Reading mode (larger text)", hi: "पढ़ने का मोड (बड़ा अक्षर)" },
+  "emagazine.swipe_hint": { bn: "মোবাইলে পাতা বদলাতে ডানে-বামে সোয়াইপ করুন", en: "Swipe left or right to turn pages on mobile", hi: "मोबाइल पर पृष्ठ बदलने के लिए बाएँ-दाएँ स्वाइप करें" },
 
 
   // Contact
