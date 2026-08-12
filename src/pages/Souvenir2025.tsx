@@ -48,6 +48,8 @@ const Souvenir2025 = () => {
   const [tocOpen, setTocOpen] = useState(true);
   const [gotoValue, setGotoValue] = useState("");
   const [gotoError, setGotoError] = useState(false);
+  const [readMode, setReadMode] = useState(false);
+  const [lightboxZoom, setLightboxZoom] = useState(false);
   const viewerRef = useRef<HTMLDivElement | null>(null);
 
   const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
