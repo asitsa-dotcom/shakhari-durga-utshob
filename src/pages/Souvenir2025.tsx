@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
 
-const pages = Array.from({ length: 38 }, (_, i) => {
-  const n = i + 1;
-  const part = n <= 19 ? `p1-${String(n).padStart(2, "0")}` : `p2-${String(n - 19).padStart(2, "0")}`;
-  return `/emagazine/2025-2026/${part}.jpg`;
-});
+const pdfUrl = "/emagazine/2025-2026/sankharitola-souvenir-2025-2026.pdf";
+
+// প্রথম খণ্ডের ৭ নম্বর পাতা (ফাঁকা) বাদ দেওয়া হয়েছে
+const pages = [
+  ...Array.from({ length: 19 }, (_, i) => i + 1)
+    .filter((n) => n !== 7)
+    .map((n) => `p1-${String(n).padStart(2, "0")}`),
+  ...Array.from({ length: 19 }, (_, i) => `p2-${String(i + 1).padStart(2, "0")}`),
+].map((part) => `/emagazine/2025-2026/${part}.jpg`);
 
 const bnDigits = "০১২৩৪৫৬৭৮৯";
 const hiDigits = "०१२३४५६७८९";
