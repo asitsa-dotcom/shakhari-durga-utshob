@@ -5,13 +5,12 @@ import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souven
 
 const pdfUrl = "/emagazine/2025-2026/sankharitola-souvenir-2025-2026.pdf";
 
-// প্রথম খণ্ডের ৭ নম্বর পাতা (ফাঁকা) বাদ দেওয়া হয়েছে
-const pages = [
-  ...Array.from({ length: 19 }, (_, i) => i + 1)
-    .filter((n) => n !== 7)
-    .map((n) => `p1-${String(n).padStart(2, "0")}`),
-  ...Array.from({ length: 19 }, (_, i) => `p2-${String(i + 1).padStart(2, "0")}`),
-].map((part) => `/emagazine/2025-2026/${part}.jpg`);
+// নতুন সংযুক্ত সংস্করণ — ৩৮ পৃষ্ঠা, কোনো পৃষ্ঠা বাদ নেই
+const pages = Array.from(
+  { length: 38 },
+  (_, i) => `/emagazine/2025-2026/page-${String(i + 1).padStart(2, "0")}.jpg`
+);
+
 
 const bnDigits = "০১২৩৪৫৬৭৮৯";
 const hiDigits = "०१२३४५६७८९";
