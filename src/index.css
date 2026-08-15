@@ -89,3 +89,16 @@
     font-family: 'Noto Sans Bengali', 'Hind Siliguri', sans-serif;
   }
 }
+
+@layer utilities {
+  @keyframes page-flip-next {
+    0% { transform: perspective(1600px) rotateY(-16deg) translateX(6%); opacity: 0.35; }
+    100% { transform: perspective(1600px) rotateY(0deg) translateX(0); opacity: 1; }
+  }
+  @keyframes page-flip-prev {
+    0% { transform: perspective(1600px) rotateY(16deg) translateX(-6%); opacity: 0.35; }
+    100% { transform: perspective(1600px) rotateY(0deg) translateX(0); opacity: 1; }
+  }
+  .animate-page-next { animation: page-flip-next 320ms ease-out; transform-origin: left center; }
+  .animate-page-prev { animation: page-flip-prev 320ms ease-out; transform-origin: right center; }
+}

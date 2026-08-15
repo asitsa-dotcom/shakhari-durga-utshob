@@ -49,10 +49,32 @@ const Souvenir2025 = () => {
   const [gotoError, setGotoError] = useState(false);
   const [readMode, setReadMode] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(false);
+  const [flip, setFlip] = useState<"next" | "prev" | null>(null);
   const viewerRef = useRef<HTMLDivElement | null>(null);
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
 
-  const goPrev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
-  const goNext = useCallback(() => setIndex((i) => Math.min(pages.length - 1, i + 1)), []);
+  const goPrev = useCallback(() => {
+    setIndex((i) => {
+      if (i === 0) return i;
+      setFlip("prev");
+      return i - 1;
+    });
+  }, []);
+  const goNext = useCallback(() => {
+    setIndex((i) => {
+      if (i === pages.length - 1) return i;
+      setFlip("next");
+      return i + 1;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!flip) return;
+    const id = window.setTimeout(() => setFlip(null), 340);
+    return () => window.clearTimeout(id);
+  }, [flip, index]);
+
+  const flipClass = flip === "next" ? "animate-page-next" : flip === "prev" ? "animate-page-prev" : "";
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -114,8 +136,8 @@ const Souvenir2025 = () => {
   };
 
   useEffect(() => {
-    const el = viewerRef.current;
-    if (!el) return;
+    const els = [viewerRef.current, lightboxRef.current].filter(Boolean) as HTMLElement[];
+    if (els.length === 0) return;
     let start: { x: number; y: number } | null = null;
     const handleStart = (e: TouchEvent) => {
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -132,13 +154,17 @@ const Souvenir2025 = () => {
       }
       start = null;
     };
-    el.addEventListener("touchstart", handleStart, { passive: true });
-    el.addEventListener("touchend", handleEnd, { passive: true });
+    els.forEach((el) => {
+      el.addEventListener("touchstart", handleStart, { passive: true });
+      el.addEventListener("touchend", handleEnd, { passive: true });
+    });
     return () => {
-      el.removeEventListener("touchstart", handleStart);
-      el.removeEventListener("touchend", handleEnd);
+      els.forEach((el) => {
+        el.removeEventListener("touchstart", handleStart);
+        el.removeEventListener("touchend", handleEnd);
+      });
     };
-  }, [goPrev, goNext]);
+  }, [goPrev, goNext, lightbox]);
 
   return (
     <div className="py-10">
@@ -235,14 +261,16 @@ const Souvenir2025 = () => {
                 <img
                   src={pages[index]}
                   alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
-                  className="block w-full rounded [image-rendering:-webkit-optimize-contrast]"
+                  onClick={() => setLightbox(true)}
+                  className={`block w-full cursor-zoom-in rounded [image-rendering:-webkit-optimize-contrast] ${flipClass}`}
                 />
               </div>
             ) : (
               <img
                 src={pages[index]}
                 alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
-                className="mx-auto block h-auto max-h-[70dvh] w-full max-w-full rounded object-contain [image-rendering:-webkit-optimize-contrast]"
+                onClick={() => setLightbox(true)}
+                className={`mx-auto block h-auto max-h-[70dvh] w-full max-w-full cursor-zoom-in rounded object-contain [image-rendering:-webkit-optimize-contrast] ${flipClass}`}
               />
             )}
           </div>
@@ -400,7 +428,8 @@ const Souvenir2025 = () => {
 
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 overflow-auto bg-black/95 p-4"
+          ref={lightboxRef}
+          className="fixed inset-0 z-50 touch-pan-y overflow-auto bg-black/95 p-2"
           onClick={() => {
             setLightbox(false);
             setLightboxZoom(false);
@@ -421,7 +450,7 @@ const Souvenir2025 = () => {
             <img
               src={pages[index]}
               alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
-              className={`rounded [image-rendering:-webkit-optimize-contrast] ${
+              className={`rounded [image-rendering:-webkit-optimize-contrast] ${flipClass} ${
                 lightboxZoom
                   ? "w-[180%] max-w-none cursor-zoom-out md:w-[130%]"
                   : "max-h-[92dvh] w-full max-w-[96vw] cursor-zoom-in object-contain"
