@@ -434,16 +434,18 @@ const Souvenir2025 = () => {
 
       {lightbox && (
         <div ref={lightboxRef} className="fixed inset-0 z-50 bg-black/95">
-          <button
-            onClick={() => {
-              setLightbox(false);
-              setLightboxZoom(false);
-            }}
-            className="fixed right-4 top-4 z-20 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
-            aria-label={t("emagazine.close")}
-          >
-            <X className="h-6 w-6" />
-          </button>
+          <div className="fixed right-4 top-4 z-20 flex items-center gap-2">
+            <button
+              onClick={() => {
+                setLightbox(false);
+                setLightboxZoom(false);
+              }}
+              className="rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
+              aria-label={t("emagazine.close")}
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
           <TransformWrapper
             initialScale={1}
             minScale={1}
@@ -460,6 +462,19 @@ const Souvenir2025 = () => {
           >
             {({ zoomIn, zoomOut, resetTransform }) => (
               <>
+                <div className="fixed right-4 top-16 z-20 sm:top-4 sm:right-14">
+                  <button
+                    onClick={() => {
+                      resetTransform();
+                      setLightboxZoom(false);
+                    }}
+                    className="flex items-center gap-1.5 rounded-full bg-background/20 px-3 py-1.5 text-xs font-medium text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
+                    aria-label={t("emagazine.fit_screen")}
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                    <span className="hidden sm:inline">{t("emagazine.fit_screen")}</span>
+                  </button>
+                </div>
                 <div className="fixed bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-background/20 px-2 py-1.5 backdrop-blur">
                   <button
                     onClick={() => zoomOut()}
@@ -469,7 +484,10 @@ const Souvenir2025 = () => {
                     <Minus className="h-5 w-5" />
                   </button>
                   <button
-                    onClick={() => resetTransform()}
+                    onClick={() => {
+                      resetTransform();
+                      setLightboxZoom(false);
+                    }}
                     aria-label={t("emagazine.fit_screen")}
                     className="rounded-full p-1.5 text-primary-foreground transition-colors hover:bg-background/40"
                   >
