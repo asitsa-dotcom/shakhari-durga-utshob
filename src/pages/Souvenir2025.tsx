@@ -142,10 +142,14 @@ const Souvenir2025 = () => {
     if (els.length === 0) return;
     let start: { x: number; y: number } | null = null;
     const handleStart = (e: TouchEvent) => {
+      if (e.touches.length > 1 || zoomedRef.current) {
+        start = null;
+        return;
+      }
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
     const handleEnd = (e: TouchEvent) => {
-      if (!start) return;
+      if (!start || zoomedRef.current) return;
       const endX = e.changedTouches[0].clientX;
       const endY = e.changedTouches[0].clientY;
       const diffX = start.x - endX;
