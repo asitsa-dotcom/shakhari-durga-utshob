@@ -427,40 +427,75 @@ const Souvenir2025 = () => {
       </div>
 
       {lightbox && (
-        <div
-          ref={lightboxRef}
-          className="fixed inset-0 z-50 touch-pan-y overflow-auto bg-black/95 p-2"
-          onClick={() => {
-            setLightbox(false);
-            setLightboxZoom(false);
-          }}
-        >
+        <div ref={lightboxRef} className="fixed inset-0 z-50 bg-black/95">
           <button
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={() => {
               setLightbox(false);
               setLightboxZoom(false);
             }}
-            className="fixed right-4 top-4 z-10 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
+            className="fixed right-4 top-4 z-20 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur transition-colors hover:bg-background/40"
             aria-label={t("emagazine.close")}
           >
             <X className="h-6 w-6" />
           </button>
-          <div className="flex min-h-full items-center justify-center">
-            <img
-              src={pages[index]}
-              alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
-              className={`rounded [image-rendering:-webkit-optimize-contrast] ${flipClass} ${
-                lightboxZoom
-                  ? "w-[180%] max-w-none cursor-zoom-out md:w-[130%]"
-                  : "max-h-[92dvh] w-full max-w-[96vw] cursor-zoom-in object-contain"
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxZoom((v) => !v);
-              }}
-            />
-          </div>
+          <TransformWrapper
+            initialScale={1}
+            minScale={1}
+            maxScale={6}
+            doubleClick={{ mode: "toggle", step: 1.6 }}
+            wheel={{ step: 0.12 }}
+            pinch={{ step: 5 }}
+            centerOnInit
+            onTransformed={(_, state) => {
+              const zoomed = state.scale > 1.01;
+              zoomedRef.current = zoomed;
+              setLightboxZoom(zoomed);
+            }}
+          >
+            {({ zoomIn, zoomOut, resetTransform }) => (
+              <>
+                <div className="fixed bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-background/20 px-2 py-1.5 backdrop-blur">
+                  <button
+                    onClick={() => zoomOut()}
+                    aria-label="Zoom out"
+                    className="rounded-full p-1.5 text-primary-foreground transition-colors hover:bg-background/40"
+                  >
+                    <Minus className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={() => resetTransform()}
+                    aria-label={t("emagazine.fit_screen")}
+                    className="rounded-full p-1.5 text-primary-foreground transition-colors hover:bg-background/40"
+                  >
+                    <RotateCcw className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={() => zoomIn()}
+                    aria-label={t("emagazine.zoom")}
+                    className="rounded-full p-1.5 text-primary-foreground transition-colors hover:bg-background/40"
+                  >
+                    <Plus className="h-5 w-5" />
+                  </button>
+                </div>
+                <TransformComponent
+                  wrapperClass="!h-[100dvh] !w-screen"
+                  contentClass="!h-[100dvh] !w-screen items-center justify-center"
+                >
+                  <img
+                    src={pages[index]}
+                    alt={currentEntry ? currentEntry.title[lang] : `${t("emagazine.page")} ${index + 1}`}
+                    draggable={false}
+                    className={`mx-auto max-h-[100dvh] w-full max-w-[100vw] select-none object-contain [image-rendering:-webkit-optimize-contrast] ${
+                      lightboxZoom ? "cursor-grab" : "cursor-zoom-in"
+                    } ${flipClass}`}
+                  />
+                </TransformComponent>
+              </>
+            )}
+          </TransformWrapper>
+          <p className="pointer-events-none fixed left-1/2 top-4 z-10 -translate-x-1/2 text-xs text-primary-foreground/70">
+            {t("emagazine.pinch_hint")}
+          </p>
         </div>
       )}
     </div>
