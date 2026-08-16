@@ -53,6 +53,7 @@ const Souvenir2025 = () => {
   const [flip, setFlip] = useState<"next" | "prev" | null>(null);
   const viewerRef = useRef<HTMLDivElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const zoomedRef = useRef(false);
 
   const goPrev = useCallback(() => {
     setIndex((i) => {
