@@ -98,6 +98,11 @@ const translations: Record<string, Record<Language, string>> = {
   "emagazine.prev": { bn: "পূর্ববর্তী", en: "Previous", hi: "पिछला" },
   "emagazine.next": { bn: "পরবর্তী", en: "Next", hi: "अगला" },
   "emagazine.zoom": { bn: "বড় করুন", en: "Zoom", hi: "ज़ूम" },
+  "emagazine.pinch_hint": {
+    bn: "পিঞ্চ করে জুম করুন, জুমের পর ড্র্যাগ করে সরান",
+    en: "Pinch to zoom, drag to pan",
+    hi: "ज़ूम के लिए पिंच करें, खिसकाने के लिए ड्रैग करें",
+  },
   "emagazine.close": { bn: "বন্ধ করুন", en: "Close", hi: "बंद करें" },
   "emagazine.progress": { bn: "অগ্রগতি", en: "Progress", hi: "प्रगति" },
   "emagazine.thumbnails": { bn: "পৃষ্ঠার থাম্বনেইল", en: "Page thumbnails", hi: "पृष्ठ थंबनेल" },
