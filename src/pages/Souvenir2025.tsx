@@ -447,8 +447,8 @@ const Souvenir2025 = () => {
             wheel={{ step: 0.12 }}
             pinch={{ step: 5 }}
             centerOnInit
-            onTransformed={(_, state) => {
-              const zoomed = state.scale > 1.01;
+            onTransform={(ref) => {
+              const zoomed = ref.state.scale > 1.01;
               zoomedRef.current = zoomed;
               setLightboxZoom(zoomed);
             }}
