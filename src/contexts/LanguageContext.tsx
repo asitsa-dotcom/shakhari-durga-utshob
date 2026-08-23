@@ -104,6 +104,7 @@ const translations: Record<string, Record<Language, string>> = {
     hi: "ज़ूम के लिए पिंच करें, खिसकाने के लिए ड्रैग करें",
   },
   "emagazine.close": { bn: "বন্ধ করুন", en: "Close", hi: "बंद करें" },
+  "emagazine.zoom_level": { bn: "জুম লেভেল", en: "Zoom level", hi: "ज़ूम स्तर" },
   "emagazine.progress": { bn: "অগ্রগতি", en: "Progress", hi: "प्रगति" },
   "emagazine.thumbnails": { bn: "পৃষ্ঠার থাম্বনেইল", en: "Page thumbnails", hi: "पृष्ठ थंबनेल" },
   "emagazine.page": { bn: "পৃষ্ঠা", en: "Page", hi: "पृष्ठ" },
