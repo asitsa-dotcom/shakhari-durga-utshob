@@ -82,6 +82,11 @@ const Souvenir2025 = () => {
   const flipClass = flip === "next" ? "animate-page-next" : flip === "prev" ? "animate-page-prev" : "";
 
   useEffect(() => {
+    if (!sidebarOpen) return;
+    activeThumbRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [index, sidebarOpen]);
+
+  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") {
