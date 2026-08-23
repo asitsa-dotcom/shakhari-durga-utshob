@@ -51,6 +51,8 @@ const Souvenir2025 = () => {
   const [readMode, setReadMode] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(false);
   const [scale, setScale] = useState(1);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const [flip, setFlip] = useState<"next" | "prev" | null>(null);
   const viewerRef = useRef<HTMLDivElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
