@@ -247,6 +247,13 @@ const Souvenir2025 = () => {
             {readMode ? <Maximize2 className="h-4 w-4" /> : <BookOpen className="h-4 w-4" />}
             {readMode ? t("emagazine.fit_screen") : t("emagazine.read_mode")}
           </button>
+          <button
+            onClick={() => setSidebarOpen((v) => !v)}
+            className="hidden items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-accent/20 md:flex"
+          >
+            <PanelLeft className="h-4 w-4" />
+            {sidebarOpen ? t("emagazine.hide_sidebar") : t("emagazine.show_sidebar")}
+          </button>
         </div>
 
         <div className={`mx-auto flex items-start justify-center gap-3 ${sidebarOpen ? "max-w-5xl" : "max-w-3xl"}`}>
