@@ -242,7 +242,40 @@ const Souvenir2025 = () => {
           </button>
         </div>
 
-        <div className="mx-auto flex max-w-3xl items-stretch justify-center gap-2 md:gap-4">
+        <div className={`mx-auto flex items-start justify-center gap-3 ${sidebarOpen ? "max-w-5xl" : "max-w-3xl"}`}>
+        {sidebarOpen && (
+          <aside
+            aria-label={t("emagazine.sidebar")}
+            className="hidden max-h-[75dvh] w-[110px] shrink-0 flex-col overflow-y-auto rounded-lg border border-border bg-card p-2 shadow-sm md:flex"
+          >
+            {pages.map((url, i) => (
+              <button
+                key={url}
+                ref={i === index ? activeThumbRef : undefined}
+                onClick={() => setIndex(i)}
+                aria-current={i === index}
+                aria-label={`${t("emagazine.page")} ${toBengaliNumber(i + 1, lang)}`}
+                className={`mb-2 w-full overflow-hidden rounded border transition-all ${
+                  i === index
+                    ? "border-primary ring-1 ring-primary"
+                    : "border-border opacity-70 hover:opacity-100"
+                }`}
+              >
+                <img
+                  src={url}
+                  alt=""
+                  loading="lazy"
+                  className="block w-full"
+                  style={{ aspectRatio: "1075/1521", objectFit: "cover" }}
+                />
+                <span className="block bg-muted py-0.5 text-center text-[10px] font-semibold text-foreground">
+                  {toBengaliNumber(i + 1, lang)}
+                </span>
+              </button>
+            ))}
+          </aside>
+        )}
+        <div className="flex min-w-0 flex-1 items-stretch justify-center gap-2 md:gap-4">
           <button
             onClick={goPrev}
             disabled={index === 0}
