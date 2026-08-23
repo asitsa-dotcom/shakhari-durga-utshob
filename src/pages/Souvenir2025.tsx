@@ -458,9 +458,10 @@ const Souvenir2025 = () => {
               const zoomed = ref.state.scale > 1.01;
               zoomedRef.current = zoomed;
               setLightboxZoom(zoomed);
+              setScale(ref.state.scale);
             }}
           >
-            {({ zoomIn, zoomOut, resetTransform }) => (
+            {({ zoomIn, zoomOut, resetTransform, setTransform, instance }) => (
               <>
                 <div className="fixed right-4 top-16 z-20 sm:top-4 sm:right-14">
                   <button
