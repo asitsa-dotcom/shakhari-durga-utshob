@@ -279,8 +279,7 @@ const Souvenir2025 = () => {
                   src={url}
                   alt=""
                   loading="lazy"
-                  className="block w-full"
-                  style={{ aspectRatio: "1075/1521", objectFit: "cover" }}
+                  className="block h-[128px] w-full object-cover object-top"
                 />
                 <span className="block bg-muted py-0.5 text-center text-[10px] font-semibold text-foreground">
                   {toBengaliNumber(i + 1, lang)}
