@@ -510,7 +510,7 @@ const Souvenir2025 = () => {
                      value={scale}
                      onChange={(e) => {
                        const next = Number(e.target.value);
-                       const st = instance.transformState;
+                       const st = instance.state;
                        const w = instance.wrapperComponent?.offsetWidth ?? window.innerWidth;
                        const h = instance.wrapperComponent?.offsetHeight ?? window.innerHeight;
                        const cx = w / 2;
