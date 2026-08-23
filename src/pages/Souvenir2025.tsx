@@ -324,6 +324,7 @@ const Souvenir2025 = () => {
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
+        </div>
 
         <p className="mt-3 text-center text-xs text-muted-foreground md:hidden">
           {t("emagazine.swipe_hint")}
