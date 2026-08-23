@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen, Plus, Minus, RotateCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen, Plus, Minus, RotateCcw, PanelLeft } from "lucide-react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
