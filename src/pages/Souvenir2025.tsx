@@ -500,9 +500,31 @@ const Souvenir2025 = () => {
                     aria-label={t("emagazine.zoom")}
                     className="rounded-full p-1.5 text-primary-foreground transition-colors hover:bg-background/40"
                   >
-                    <Plus className="h-5 w-5" />
-                  </button>
-                </div>
+                     <Plus className="h-5 w-5" />
+                   </button>
+                   <input
+                     type="range"
+                     min={1}
+                     max={6}
+                     step={0.1}
+                     value={scale}
+                     onChange={(e) => {
+                       const next = Number(e.target.value);
+                       const st = instance.transformState;
+                       const w = instance.wrapperComponent?.offsetWidth ?? window.innerWidth;
+                       const h = instance.wrapperComponent?.offsetHeight ?? window.innerHeight;
+                       const cx = w / 2;
+                       const cy = h / 2;
+                       const k = next / (st.scale || 1);
+                       setTransform(cx - (cx - st.positionX) * k, cy - (cy - st.positionY) * k, next, 120);
+                     }}
+                     aria-label={t("emagazine.zoom_level")}
+                     className="h-1.5 w-24 cursor-pointer appearance-none rounded-full bg-primary-foreground/30 accent-primary sm:w-36 [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary-foreground"
+                   />
+                   <span className="min-w-11 text-center text-xs font-semibold tabular-nums text-primary-foreground">
+                     {toBengaliNumber(Math.round(scale * 100), lang)}%
+                   </span>
+                 </div>
                 <TransformComponent
                   wrapperClass="!h-[100dvh] !w-screen"
                   contentClass="!h-[100dvh] !w-screen items-center justify-center"
