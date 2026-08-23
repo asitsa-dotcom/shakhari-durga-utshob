@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen, Plus, Minus, RotateCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Search, List, ArrowRight, Download, Maximize2, BookOpen, Plus, Minus, RotateCcw, PanelLeft } from "lucide-react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { souvenir2025Toc, categoryLabels, type TocCategory } from "@/data/souvenir2025Toc";
@@ -51,6 +51,8 @@ const Souvenir2025 = () => {
   const [readMode, setReadMode] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(false);
   const [scale, setScale] = useState(1);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const [flip, setFlip] = useState<"next" | "prev" | null>(null);
   const viewerRef = useRef<HTMLDivElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
@@ -78,6 +80,11 @@ const Souvenir2025 = () => {
   }, [flip, index]);
 
   const flipClass = flip === "next" ? "animate-page-next" : flip === "prev" ? "animate-page-prev" : "";
+
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    activeThumbRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [index, sidebarOpen]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -240,9 +247,48 @@ const Souvenir2025 = () => {
             {readMode ? <Maximize2 className="h-4 w-4" /> : <BookOpen className="h-4 w-4" />}
             {readMode ? t("emagazine.fit_screen") : t("emagazine.read_mode")}
           </button>
+          <button
+            onClick={() => setSidebarOpen((v) => !v)}
+            className="hidden items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-accent/20 md:flex"
+          >
+            <PanelLeft className="h-4 w-4" />
+            {sidebarOpen ? t("emagazine.hide_sidebar") : t("emagazine.show_sidebar")}
+          </button>
         </div>
 
-        <div className="mx-auto flex max-w-3xl items-stretch justify-center gap-2 md:gap-4">
+        <div className={`mx-auto flex items-start justify-center gap-3 ${sidebarOpen ? "max-w-5xl" : "max-w-3xl"}`}>
+        {sidebarOpen && (
+          <aside
+            aria-label={t("emagazine.sidebar")}
+            className="hidden max-h-[75dvh] w-[110px] shrink-0 flex-col overflow-y-auto rounded-lg border border-border bg-card p-2 shadow-sm md:flex"
+          >
+            {pages.map((url, i) => (
+              <button
+                key={url}
+                ref={i === index ? activeThumbRef : undefined}
+                onClick={() => setIndex(i)}
+                aria-current={i === index}
+                aria-label={`${t("emagazine.page")} ${toBengaliNumber(i + 1, lang)}`}
+                className={`mb-2 w-full overflow-hidden rounded border transition-all ${
+                  i === index
+                    ? "border-primary ring-1 ring-primary"
+                    : "border-border opacity-70 hover:opacity-100"
+                }`}
+              >
+                <img
+                  src={url}
+                  alt=""
+                  loading="lazy"
+                  className="block h-[128px] w-full object-cover object-top"
+                />
+                <span className="block bg-muted py-0.5 text-center text-[10px] font-semibold text-foreground">
+                  {toBengaliNumber(i + 1, lang)}
+                </span>
+              </button>
+            ))}
+          </aside>
+        )}
+        <div className="flex min-w-0 flex-1 items-stretch justify-center gap-2 md:gap-4">
           <button
             onClick={goPrev}
             disabled={index === 0}
@@ -290,6 +336,7 @@ const Souvenir2025 = () => {
           >
             <ChevronRight className="h-6 w-6" />
           </button>
+        </div>
         </div>
 
         <p className="mt-3 text-center text-xs text-muted-foreground md:hidden">
