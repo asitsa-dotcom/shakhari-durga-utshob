@@ -1,12 +1,11 @@
 import { User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import siddharthaPhoto from "@/assets/siddhartha-chakraborty.jpg.asset.json";
-import asimPhoto from "@/assets/asim-chakraborty.jpg.asset.json";
+import siddharthaPhoto from "@/assets/siddhartha-chakraborty-profile.jpg";
 
 const leaders = [
-  { key: "leadership.president", bn: "শ্রী অসীম চক্রবর্তী", en: "ASIM CHAKRABORTY", photo: asimPhoto.url },
+  { key: "leadership.president", bn: "শ্রী অসীম চক্রবর্তী", en: "ASIM CHAKRABORTY", photo: "/images/leadership/asim-chakraborty.jpg" },
   { key: "leadership.vice_president", bn: "শ্রী অশোক ভট্টাচার্য", en: "ASHOKE BHATTACHARYA", photo: null },
-  { key: "leadership.secretary", bn: "শ্রী সিদ্ধার্থ চক্রবর্তী", en: "SIDDHARTHA CHAKRABORTY", photo: siddharthaPhoto.url },
+  { key: "leadership.secretary", bn: "শ্রী সিদ্ধার্থ চক্রবর্তী", en: "SIDDHARTHA CHAKRABORTY", photo: siddharthaPhoto },
   { key: "leadership.joint_secretary", bn: "শ্রী শান্তনু দাস", en: "SANTANU DAS", photo: null },
   { key: "leadership.treasurer", bn: "শ্রী অসিত কুমার সরকার", en: "ASIT KUMAR SARKAR", photo: "/images/treasurer.jpg" },
 ];
