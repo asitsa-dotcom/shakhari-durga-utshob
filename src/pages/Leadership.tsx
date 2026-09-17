@@ -1,10 +1,12 @@
 import { User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import siddharthaPhoto from "@/assets/siddhartha-chakraborty.jpg.asset.json";
+import asimPhoto from "@/assets/asim-chakraborty.jpg.asset.json";
 
 const leaders = [
-  { key: "leadership.president", bn: "শ্রী অসীম চক্রবর্তী", en: "ASIM CHAKRABORTY", photo: null },
+  { key: "leadership.president", bn: "শ্রী অসীম চক্রবর্তী", en: "ASIM CHAKRABORTY", photo: asimPhoto.url },
   { key: "leadership.vice_president", bn: "শ্রী অশোক ভট্টাচার্য", en: "ASHOKE BHATTACHARYA", photo: null },
-  { key: "leadership.secretary", bn: "শ্রী সিদ্ধার্থ চক্রবর্তী", en: "SIDDHARTHA CHAKRABORTY", photo: null },
+  { key: "leadership.secretary", bn: "শ্রী সিদ্ধার্থ চক্রবর্তী", en: "SIDDHARTHA CHAKRABORTY", photo: siddharthaPhoto.url },
   { key: "leadership.joint_secretary", bn: "শ্রী শান্তনু দাস", en: "SANTANU DAS", photo: null },
   { key: "leadership.treasurer", bn: "শ্রী অসিত কুমার সরকার", en: "ASIT KUMAR SARKAR", photo: "/images/treasurer.jpg" },
 ];
@@ -31,7 +33,7 @@ const Leadership = () => {
               className="flex flex-col items-center rounded-xl bg-card px-6 py-8 text-center shadow-md"
             >
               {leader.photo ? (
-                <img src={leader.photo} alt={leader.en} className="h-16 w-16 rounded-full object-cover" />
+                <img src={leader.photo} alt={leader.en} className="h-24 w-24 rounded-full object-cover object-top" />
               ) : (
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <User className="h-8 w-8 text-primary" />
